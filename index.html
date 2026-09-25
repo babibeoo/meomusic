@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trạm Nghe Nhạc</title>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="icon" href="favicon.jpg" type="image/png">
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="top-bar">
+            <i class="material-icons">expand_more</i>
+            <span></span>
+            <i class="material-icons">more_horiz</i>
+        </div>
+
+        <div class="img-area">
+            <img src="" alt="">
+
+        </div>
+
+        <div class="song-details">
+            <p class="name"></p>
+            <p class="artist"></p>
+        </div>
+
+        <div class="progress-area">
+            <div class="progress-bar">
+                <audio src="" id="main-audio"></audio>
+            </div>
+            <div class="song-timer" style="display: flex;">
+                <span class="current-time" style="flex-basis: 50%;">
+                    0:00
+                </span>
+                <span class="max-duration" style="flex-basis: 50%; text-align: end;">
+                    0:00
+                </span>
+            </div>
+        </div>
+
+        <div class="controls">
+            <i id="repeat-plist" class="material-icons" title="Playlist looped">repeat</i>
+            <i id="prev" class="material-icons">skip_previous</i>
+            <div class="play-pause">
+                <i class="material-icons play">play_arrow</i>
+            </div>
+            <i id="next" class="material-icons">skip_next</i>
+            <i id="more-music" class="material-icons">queue_music</i>
+        </div>
+
+        <div class="music-list">
+            <div class="header">
+                <div class="row">
+                    <i class="list material-icons">queue_music</i>
+                    <span>Music List</span>
+                </div>
+                <div class="header-actions">
+                    <i id="add-song-btn" class="material-icons" title="Thêm bài hát mới (R2/URL)">add_circle_outline</i>
+                    <i id="close" class="material-icons">close</i>
+                </div>
+            </div>
+            <ul>
+
+            </ul>
+        </div>
+    </div>
+
+    <!-- Modal Thêm Bài Hát (Cloudflare R2 / Direct URL) -->
+    <div id="add-music-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span>Thêm bài hát mới</span>
+                <i id="close-modal" class="material-icons">close</i>
+            </div>
+            <form id="add-music-form">
+                <div class="input-group">
+                    <label for="input-name">Tên bài hát *</label>
+                    <input type="text" id="input-name" placeholder="Ví dụ: Thủy Chung" required>
+                </div>
+                <div class="input-group">
+                    <label for="input-artist">Tên ca sĩ *</label>
+                    <input type="text" id="input-artist" placeholder="Ví dụ: Thương Võ" required>
+                </div>
+                <div class="input-group">
+                    <label for="input-src">Link Audio (URL / YouTube) *</label>
+                    <div class="input-with-upload">
+                        <input type="text" id="input-src" placeholder="Dán link hoặc upload file MP3 từ máy" required>
+                        <label for="upload-audio" class="upload-btn" title="Upload MP3 từ máy">
+                            <i class="material-icons">cloud_upload</i>
+                            <span id="upload-audio-label">MP3</span>
+                        </label>
+                        <input type="file" id="upload-audio" accept="audio/*" hidden>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label for="input-img">Link Ảnh Bìa (Tùy chọn)</label>
+                    <div class="input-with-upload">
+                        <input type="text" id="input-img" placeholder="Dán link hoặc upload ảnh từ máy">
+                        <label for="upload-img" class="upload-btn" title="Upload ảnh từ máy">
+                            <i class="material-icons">add_photo_alternate</i>
+                            <span id="upload-img-label">Ảnh</span>
+                        </label>
+                        <input type="file" id="upload-img" accept="image/*" hidden>
+                    </div>
+                </div>
+                <!-- Upload progress indicator -->
+                <div id="upload-status" class="upload-status" style="display: none;">
+                    <div class="upload-progress-bar">
+                        <div class="upload-progress-fill" id="upload-progress-fill"></div>
+                    </div>
+                    <span id="upload-status-text">Đang upload...</span>
+                </div>
+                <div class="modal-buttons">
+                    <button type="button" id="btn-cancel" class="btn btn-secondary">Hủy</button>
+                    <button type="submit" class="btn btn-primary" id="btn-submit">Thêm bài hát</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Hidden YouTube Player Container -->
+    <div id="yt-player-container" style="position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; overflow: hidden;">
+        <div id="yt-player"></div>
+    </div>
+    <script src="https://www.youtube.com/iframe_api"></script>
+
+    <script src="./js/music-list.js"></script>
+    <script src="./js/script.js"></script>
+
+</body>
+
+</html>
